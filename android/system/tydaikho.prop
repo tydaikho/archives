@@ -1,0 +1,89 @@
+# tydaikho
+# Lanscape lockscreen
+log.tag.launcher_force_rotate=VERBOSE
+lockscreen.rot_override=true
+launcher.force_rotation=true
+ro.sf.hwrotation=270
+# Bravia engine
+ro.service.swiqi.supported=true
+persist.service.swiqi.enable=1
+# Wifi improvement
+wifi.supplicant_scan_interval=150
+persist.wifi_scan_interval=150
+telephony.lteOnGsmDevice=1
+telephony.lteOnCdmaDevice=1
+# Enable HSUPA Network Mode
+ro.ril.hsxpa=3
+# Improvement performance
+debug.performance.tuning=1
+# Hardware Acceleration Enabled
+video.accelerate.hw=1
+hw3d.force=1
+debug.sf.hw=1
+debug.egl.hw=1
+debug.egl.profiler=1
+debug.composition.type=gpu
+persist.sys.composition.type=gpu
+persist.sys.ui.hw=1
+# Enable Camera2API
+persist.camera.HAL3.enabled=1
+# Improvement Image quality
+ro.media.enc.jpeg.quality=100
+# Enable Surface Dithering
+persist.sys.use_dithering=1
+# Allow the purge of assets to free-up more RAM
+persist.sys.purgeable_assets=1
+# Enable Adaptive Multi-Rate Wideband
+ro.ril.enable.amr.wideband=1
+# FPS Capping Enabled
+debug.gr.swapinterval=1
+# Power tweaks
+pm.sleep_mode=1
+ro.config.hw_power_saving=true
+ro.config.hw_fast_dormancy=1
+ro.ril.disable.power.collapse=0
+ro.ril.power_collapse=1
+ro.mot.eri.losalert.delay=1000
+# Better signal
+persist.cust.tel.eons=1
+# Disables sending of usage data
+ro.config.nocheckin=1
+# Disable adb notification
+persist.adb.notify=0
+# disable boot annimation
+debug.sf.nobootanimation=1
+# Faster DNS Resolution Tweaks
+net.dns1=8.8.8.8
+net.dns2=8.8.4.4
+### Pimp my Rom : Navigation Bar Disabled
+qemu.hw.mainkeys=1
+dalvik.vm.dexopt-flags=m=y
+### Pimp my Rom : Phone Ringing Delay
+ro.telephony.call_ring.delay=0
+ring.delay=0
+### Pimp my Rom : Proximity Sensor Delay
+ro.lge.proximity.delay=0
+mot.proximity.delay=0
+### Pimp my Rom : Amount of In-Call Volume Steps
+ro.config.vc_call_steps=10
+### Pimp my Rom : MMS/SMS Retries Amount & Timer
+ro.gsm.2nd_data_retries=null
+# Enable VoLTE & WifiCalling
+# Debug Options
+persist.dbg.ims_volte_enable=1 
+persist.dbg.volte_avail_ovr=1 
+persist.dbg.vt_avail_ovr=1
+persist.dbg.wfc_avail_ovr=1
+# Radio Options
+persist.radio.rat_on=combine
+persist.radio.data_ltd_sys_ind=1
+persist.radio.data_con_rprt=1
+persist.radio.calls.on.ims=1
+### Pimp My Rom : FPS Capping Enabled
+debug.gr.swapinterval=1
+dalvik.vm.dexopt-flags=m=y
+### Pimp my Rom : Video Streaming Tweak 
+media.stagefright.enable-player=true
+media.stagefright.enable-meta=true
+media.stagefright.enable-scan=false
+media.stagefright.enable-http=true

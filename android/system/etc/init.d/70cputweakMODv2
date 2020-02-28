@@ -1,0 +1,306 @@
+#!/system/bin/sh
+#
+# parts taken from "screenstate_scaling" by florian.schaefer & "battery tweak" by collin_ph@xda
+# by freeza for Galaxy S fre3 ROM
+
+AWAKE_MODE() # Screen-ON
+{
+# VM parameters
+BTLF=`cat /sys/class/power_supply/battery/capacity`
+BTST=`cat /sys/class/power_supply/battery/status`
+chmod 0664 /sys/devices/system/cpu/cpu1/online
+echo "1" > /sys/devices/system/cpu/cpu1/online
+#chmod 0444 /sys/devices/system/cpu/cpu1/online
+chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+chmod 0644 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+echo 486000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 486000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+chmod 0444 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+if [ "$BTST" == "Charging" ] || [ "$BTST" == "Full" ]; then
+if [ "$(pgrep mpdecision)" ]
+ then
+    stop mpdecision
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    chmod 0444 /sys/devices/system/cpu/cpu1/online
+fi
+	echo "OnDemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "OnDemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1998000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1998000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "70" > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate;
+	echo "2" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor;
+	echo "15" > /sys/devices/system/cpu/cpufreq/ondemand/down_differential;
+	echo 1134000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1350 1325 1300 1275 1250 1200 1200 1185 1185 1175 1175 1150 1150 1125 1125 1075 1075 1050 1050 1025 1025 975 975 950 950 925 925 925 925 925 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 85 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "intellidemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "intellidemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1674000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1674000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "90" > /sys/devices/system/cpu/cpufreq/intellidemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_rate;
+	echo "4" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_down_factor;
+	echo "3" > /sys/devices/system/cpu/cpufreq/intellidemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 74 ] && [ "$BTLF" -lt 85 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "intellidemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "intellidemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1458000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1458000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "90" > /sys/devices/system/cpu/cpufreq/intellidemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_rate;
+	echo "4" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_down_factor;
+	echo "3" > /sys/devices/system/cpu/cpufreq/intellidemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 64 ] && [ "$BTLF" -lt 74 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "intellidemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "intellidemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1350000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1350000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "90" > /sys/devices/system/cpu/cpufreq/intellidemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_rate;
+	echo "4" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_down_factor;
+	echo "3" > /sys/devices/system/cpu/cpufreq/intellidemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 50 ] && [ "$BTLF" -lt 64 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "intellidemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "intellidemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1242000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1242000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "90" > /sys/devices/system/cpu/cpufreq/intellidemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_rate;
+	echo "4" > /sys/devices/system/cpu/cpufreq/intellidemand/sampling_down_factor;
+	echo "3" > /sys/devices/system/cpu/cpufreq/intellidemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 40 ] && [ "$BTLF" -lt 50 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1134000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1134000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+#	echo "95" /sys/devices/system/cpu/cpufreq/ondemand/up_threshold;
+#	echo "120000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate;
+#	echo "1" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor;
+#	echo "5" > /sys/devices/system/cpu/cpufreq/ondemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 25 ] && [ "$BTLF" -lt 40 ]; then
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1026000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1026000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+#	echo "95" /sys/devices/system/cpu/cpufreq/ondemand/up_threshold;
+#	echo "120000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate;
+#	echo "1" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor;
+#	echo "5" > /sys/devices/system/cpu/cpufreq/ondemand/down_differential;
+	echo 810000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+else
+if [ "$BTLF" -ge 0 ] && [ "$BTLF" -lt 25 ]; then
+if [ "$(pgrep mpdecision)" ]
+ then
+    stop mpdecision
+fi
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    chmod 0444 /sys/devices/system/cpu/cpu1/online
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 702000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 702000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+#	echo "95" /sys/devices/system/cpu/cpufreq/ondemand/up_threshold;
+#	echo "120000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate;
+#	echo "1" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor;
+#	echo "5" > /sys/devices/system/cpu/cpufreq/ondemand/down_differential;
+	echo 648000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_first_freq_limit;
+	echo 486000 > /sys/devices/system/cpu/cpu0/cpufreq/touch_booster_second_freq_limit;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+fi
+fi
+fi
+fi
+fi
+fi
+fi
+fi
+	echo -1 > /proc/sys/kernel/sched_rt_runtime_us;
+	echo 100000 > /proc/sys/kernel/sched_rt_period_us;
+	echo 95000 > /proc/sys/kernel/sched_rt_runtime_us;
+	echo 30 > /proc/sys/vm/swappiness;
+	echo 1000 > /proc/sys/vm/dirty_expire_centisecs;
+	echo 2000 > /proc/sys/vm/dirty_writeback_centisecs;
+	echo 10 > /proc/sys/vm/dirty_background_ratio;
+	echo 40 > /proc/sys/vm/dirty_ratio;
+	echo 0 > /proc/sys/vm/page-cluster;
+	echo "2048" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+	echo "2056" > /sys/block/mmcblk0/bdi/read_ahead_kb;
+	echo "2056" > /sys/block/mmcblk0/queue/read_ahead_kb;
+	echo 0 > /proc/sys/vm/laptop_mode;
+	echo 300 > /proc/sys/vm/vfs_cache_pressure;
+	echo 8192 > /proc/sys/vm/min_free_kbytes;
+}
+
+SLEEP_MODE()# Screen-OFF
+{
+# VM parameters
+BTSTo=`cat /sys/class/power_supply/battery/status`
+chmod 0664 /sys/devices/system/cpu/cpu1/online
+echo "1" > /sys/devices/system/cpu/cpu1/online
+chmod 0444 /sys/devices/system/cpu/cpu1/online
+chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+chmod 0644 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+echo 486000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 486000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+chmod 0444 /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+if [ "$BTSTo" == "Charging" ] || [ "$BTSTo" == "Full" ]; then
+if [ "$(pgrep mpdecision)" ]
+ then
+    stop mpdecision
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    echo "1" > /sys/devices/system/cpu/cpu1/online
+    chmod 0444 /sys/devices/system/cpu/cpu1/online
+	echo "OnDemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+	echo "OnDemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor;
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1998000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 1998000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "70" > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold;
+	echo "50000" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate;
+	echo "2" > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor;
+	echo "15" > /sys/devices/system/cpu/cpufreq/ondemand/down_differential;
+	echo "1350 1325 1300 1275 1250 1200 1200 1185 1185 1175 1175 1150 1150 1125 1125 1075 1075 1050 1050 1025 1025 975 975 950 950 925 925 925 925 925 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+fi
+else
+if [ -z "$(pgrep mpdecision)" ]
+ then
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    start mpdecision
+fi
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+	echo "msm-dcvs" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor;
+	chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 486000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo 486000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+	chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+	echo "1325 1300 1275 1250 1225 1175 1175 1160 1160 1150 1150 1125 1125 1100 1100 1050 1050 1025 1025 1000 1000 950 950 925 925 900 900 900 900 900 " > /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table;
+fi
+	echo -1 > /proc/sys/kernel/sched_rt_runtime_us;
+	echo 1000000 > /proc/sys/kernel/sched_rt_period_us;
+	echo 950000 > /proc/sys/kernel/sched_rt_runtime_us;
+	echo 0 > /proc/sys/vm/swappiness;
+	echo 0 > /proc/sys/vm/dirty_expire_centisecs;
+	echo 0 > /proc/sys/vm/dirty_writeback_centisecs;
+	echo 60 > /proc/sys/vm/dirty_background_ratio;
+	echo 95 > /proc/sys/vm/dirty_ratio;
+	echo 3 > /proc/sys/vm/page-cluster;
+	echo "2048" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+	echo "2056" > /sys/block/mmcblk0/bdi/read_ahead_kb;
+	echo "2056" > /sys/block/mmcblk0/queue/read_ahead_kb;
+	echo 5 > /proc/sys/vm/laptop_mode;
+	echo 10 > /proc/sys/vm/vfs_cache_pressure;
+	echo 2048 > /proc/sys/vm/min_free_kbytes;
+}
+	
+MAX_PHONE() # remove lag when answering phone calls
+{
+pidphone=`pidof com.android.phone`;
+if [ $pidphone ];
+then
+	echo -17 > /proc/$pidphone/oom_adj; # exclude com.android.phone from oom-killer
+	renice -20 $pidphone; # set highest nice level for com.android.phone
+	exit;
+else
+	sleep 1;
+	MAX_PHONE;
+fi;
+}
+
+# Background process to check screen state
+	(while [ 1 ]; 
+	do
+		cat /sys/power/wait_for_fb_wake;
+		AWAKE_MODE;
+
+		cat /sys/power/wait_for_fb_sleep;
+		SLEEP_MODE;
+	done &);
+
+# One-time process to optimize com.android.phone
+	(while [ 1 ];
+	do
+		sleep 10;
+		MAX_PHONE;
+	done &);
