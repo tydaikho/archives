@@ -21,7 +21,7 @@ SSH_Port1='22'
 SSH_Port2='225'
 
 # Your SSH Banner
-SSH_Banner='https://pastebin.com/raw/LUHJuPmr'
+SSH_Banner='https://pastebin.com/raw/szjGe35R'
 
 # Dropbear Ports
 Dropbear_Port1='550'
@@ -42,7 +42,7 @@ Privoxy_Port2='8080'
 OvpnDownload_Port='86' # Before changing this value, please read this document. It contains all unsafe ports for Google Chrome Browser, please read from line #23 to line #89: https://chromium.googlesource.com/chromium/src.git/+/refs/heads/master/net/base/port_util.cc
 
 # Server local time
-MyVPS_Time='Asia/Manila'
+MyVPS_Time='Europe/Vienna'
 #############################
 
 
@@ -91,14 +91,15 @@ function InstUpdates(){
 function InstWebmin(){
  # Download the webmin .deb package
  # You may change its webmin version depends on the link you've loaded in this variable(.deb file only, do not load .zip or .tar.gz file):
- WebminFile='http://prdownloads.sourceforge.net/webadmin/webmin_1.910_all.deb'
- wget -qO webmin.deb "$WebminFile"
- 
+ #WebminFile='http://prdownloads.sourceforge.net/webadmin/webmin_1.910_all.deb'
+ #wget -qO webmin.deb "$WebminFile"
  # Installing .deb package for webmin
- dpkg -s --install webmin.deb
- 
- rm -rf webmin.deb
- 
+ #dpkg -s --install webmin.deb
+ #rm -rf webmin.deb
+ wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
+ echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list
+ apt update
+ apt install webmin -y
  # Configuring webmin server config to use only http instead of https
  sed -i 's|ssl=1|ssl=0|g' /etc/webmin/miniserv.conf
  
