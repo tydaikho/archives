@@ -1,0 +1,56 @@
+# DEBIAN BULLSEYE
+deb http://deb.debian.org/debian bullseye main contrib non-free
+deb-src http://deb.debian.org/debian bullseye main contrib non-free
+deb http://deb.debian.org/debian bullseye-backports main contrib non-free
+deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
+#deb http://mirror.csclub.uwaterloo.ca/debian/ bullseye contrib non-free main
+#deb-src http://mirror.csclub.uwaterloo.ca/debian/ bullseye main non-free contrib
+
+# DEBIAN BUSTER
+deb http://deb.debian.org/debian stable main contrib non-free
+deb-src http://deb.debian.org/debian stable main contrib non-free
+deb http://deb.debian.org/debian stable-backports main contrib non-free
+deb-src http://deb.debian.org/debian stable-backports main contrib non-free
+#deb http://mirror.csclub.uwaterloo.ca/debian/ stable contrib non-free main
+#deb-src http://mirror.csclub.uwaterloo.ca/debian/ stable main non-free contrib
+
+# DEBIAN UNSTABLE (AKA SID)
+deb http://deb.debian.org/debian unstable main contrib non-free
+deb-src http://deb.debian.org/debian unstable main contrib non-free
+#deb http://mirror.csclub.uwaterloo.ca/debian/ unstable main non-free contrib
+#deb-src http://mirror.csclub.uwaterloo.ca/debian/ unstable contrib non-free main
+
+# DEBIAN SID
+deb http://deb.debian.org/debian sid main contrib non-free
+deb-src http://deb.debian.org/debian sid main contrib non-free
+#deb http://mirror.csclub.uwaterloo.ca/debian/ sid contrib non-free main
+#deb-src http://mirror.csclub.uwaterloo.ca/debian/ sid main non-free contrib
+
+# DEBIAN SID
+deb http://deb.debian.org/debian experimental main contrib non-free
+deb-src http://deb.debian.org/debian experimental main contrib non-free
+#deb http://mirror.csclub.uwaterloo.ca/debian/ experimental contrib non-free main
+#deb-src http://mirror.csclub.uwaterloo.ca/debian/ experimental main non-free contrib
+
+# LIQUORIX (OPTIONAL KERNELS)
+deb http://liquorix.net/debian sid main
+deb-src http://liquorix.net/debian sid main
+
+# AVL Kernels
+deb http://www.bandshed.net/kernels/apt/ buster main
+
+# UBUNTUZILLA (Mozilla Firefox and Thunderbird Builds)
+deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt/ all main
+
+# CINELERRA 5
+deb [trusted=yes] https://cinelerra-gg.org/download/pkgs/debian10 buster main
+
+# WINEHQ.ORG
+deb https://dl.winehq.org/wine-builds/debian/ buster main
+
+# FAUDIO (DEPENDENCY FOR WINE-STAGING 5.0+)
+deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10 ./
+
+# DOCKER DEBIAN COMMUNITY EDITION
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+# deb-src [arch=amd64] https://download.docker.com/linux/debian buster stable
