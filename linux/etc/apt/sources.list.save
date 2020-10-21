@@ -1,0 +1,28 @@
+# DEBIAN BUSTER
+deb http://mirror.csclub.uwaterloo.ca/debian/ buster contrib non-free main
+deb-src http://mirror.csclub.uwaterloo.ca/debian/ buster main non-free contrib
+
+# DEBIAN UNSTABLE (AKA SID)
+# deb http://mirror.csclub.uwaterloo.ca/debian/ unstable main non-free contrib
+# deb-src http://mirror.csclub.uwaterloo.ca/debian/ unstable contrib non-free main
+
+# LIQUORIX (OPTIONAL KERNELS)
+# deb http://liquorix.net/debian sid main
+# deb-src http://liquorix.net/debian sid main
+
+# AVL Kernels
+deb http://www.bandshed.net/kernels/apt/ buster main
+
+# UBUNTUZILLA (Mozilla Firefox and Thunderbird Builds)
+deb http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt/ all main
+
+# CINELERRA 5
+deb [trusted=yes] https://cinelerra-gg.org/download/pkgs/debian10 buster main
+
+# WINEHQ.ORG
+deb https://dl.winehq.org/wine-builds/debian/ buster main
+
+# FAUDIO (DEPENDENCY FOR WINE-STAGING 5.0+)
+deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10 ./
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+# deb-src [arch=amd64] https://download.docker.com/linux/debian buster stable
